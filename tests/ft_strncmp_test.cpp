@@ -40,10 +40,11 @@ int main(void)
 	signed char	str1[] = "test";
 	signed char	str2[] = "test";
 	size_t		len = strlen((const char *)str1);
+	auto sign = [](int x) { return (x > 0) - (x < 0); };
 	str2[3] = CHAR_MIN;
-	/* 17 */ check(ft_strncmp((const char *)str1, (const char *)str2, len) == strncmp((const char *)str1, (const char *)str2, len)); showLeaks();
+	/* 17 */ check(sign(ft_strncmp((const char *)str1, (const char *)str2, len)) == sign(strncmp((const char *)str1, (const char *)str2, len)));
 	str2[3] = -42;
-	/* 18 */ check(ft_strncmp((const char *)str1, (const char *)str2, len) == strncmp((const char *)str1, (const char *)str2, len)); showLeaks();
+	/* 18 */ check(sign(ft_strncmp((const char *)str1, (const char *)str2, len)) == sign(strncmp((const char *)str1, (const char *)str2, len)));
 
 	write(1, "\n", 1);
 	return (0);
